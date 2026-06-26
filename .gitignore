@@ -1,0 +1,133 @@
+# ─── Environment & Secrets ─────────────────────────────────────────────────────
+.env
+*.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+
+# ─── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+Lib/
+Scripts/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# ML model artifacts (large binary files — store in cloud/DVC, not git)
+ml-service/models/*.pkl
+ml-service/models/*.joblib
+ml-service/models/*.h5
+ml-service/models/*.pt
+ml-service/models/*.onnx
+
+# Large data files (keep sample CSVs, ignore raw/processed dumps)
+ml-service/data/*.csv.bak
+ml-service/data/raw/
+ml-service/data/processed/
+generate_chart.py
+
+# Stan/Prophet compiled model cache
+ml-service/data/prophet_cache/
+cmdstan/
+
+# ─── Node.js ───────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+package-lock.json.bak
+
+# ─── Frontend Build ────────────────────────────────────────────────────────────
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# ─── Logs ──────────────────────────────────────────────────────────────────────
+logs/
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+
+# ─── Database & Cache ──────────────────────────────────────────────────────────
+dump.rdb
+*.rdb
+mongodb_data/
+.mongo/
+
+
+# ─── Docker ────────────────────────────────────────────────────────────────────
+.docker/
+docker-compose.override.yml
+
+# ─── OS Files ──────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ─── IDE & Editors ─────────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.classpath
+
+# ─── Testing & Coverage ────────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# ─── Misc ──────────────────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*.bak
+*.orig
+.cache/
+tmp/
+temp/
