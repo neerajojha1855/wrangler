@@ -1,0 +1,6 @@
+fastapi
+mcp
+websockets
+pydantic
+uvicorn
+ollama
