@@ -68,6 +68,7 @@ dump.rdb
 *.rdb
 
 
+
 # ─── Docker ────────────────────────────────────────────────────────────────────
 .docker/
 docker-compose.override.yml
