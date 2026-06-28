@@ -38,23 +38,6 @@ Scripts/
 .ipynb_checkpoints/
 *.ipynb
 
-# ML model artifacts (large binary files — store in cloud/DVC, not git)
-ml-service/models/*.pkl
-ml-service/models/*.joblib
-ml-service/models/*.h5
-ml-service/models/*.pt
-ml-service/models/*.onnx
-
-# Large data files (keep sample CSVs, ignore raw/processed dumps)
-ml-service/data/*.csv.bak
-ml-service/data/raw/
-ml-service/data/processed/
-generate_chart.py
-
-# Stan/Prophet compiled model cache
-ml-service/data/prophet_cache/
-cmdstan/
-
 # ─── Node.js ───────────────────────────────────────────────────────────────────
 node_modules/
 npm-debug.log*
@@ -83,8 +66,6 @@ pids/
 # ─── Database & Cache ──────────────────────────────────────────────────────────
 dump.rdb
 *.rdb
-mongodb_data/
-.mongo/
 
 
 # ─── Docker ────────────────────────────────────────────────────────────────────
