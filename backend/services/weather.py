@@ -2,7 +2,7 @@ import requests
 from config import settings
 
 def get_current_weather(city: str) -> dict:
-    url = f"https//api.openweather.org/data/2.5/weather?q={city}&appid={settings.OPENWEATHER_API_KEY}&units=metric"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.OPENWEATHER_API_KEY}&units=metric"
     response = requests.get(url)
 
     if response.status_code != 200:
@@ -13,6 +13,6 @@ def get_current_weather(city: str) -> dict:
     return {
         "temp": data["main"]["temp"],
         "humidity": data["main"]["humidity"],
-        "wind_speed": data["main"]["speed"],
+        "wind_speed": data["wind"]["speed"],
         "condition": data["weather"][0]["main"]
     }
