@@ -1,6 +1,16 @@
-fastapi
-mcp
-websockets
+# Core Web & API
+flask
+flask-cors
 pydantic
-uvicorn
+pydantic-settings
+requests
+
+# AI & Agents
+mcp
 ollama
+
+# Testing (Phase 5 Polish)
+pytest
+httpx
+pytest-asyncio
+playwright
