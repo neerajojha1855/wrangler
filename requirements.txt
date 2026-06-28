@@ -1,8 +1,7 @@
 # Core Web & API
 flask
 flask-cors
-pydantic
-pydantic-settings
+python-dotenv
 requests
 
 # AI & Agents
