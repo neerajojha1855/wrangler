@@ -12,6 +12,11 @@ def generate_itinerary():
 
     if not all([city, vibe, budget]):
         return {"error": "Missing parameters"}, 400
+        
+    try:
+        budget = float(budget)
+    except ValueError:
+        return {"error": "Invalid budget format"}, 400
     
     return Response(
         generate_itinerary_stream(city, vibe, budget),
