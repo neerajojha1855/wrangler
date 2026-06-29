@@ -16,7 +16,9 @@ def plan_route(city: str, vibe: str, budget: float):
     Plan a 1-day itinerary for {city}.
     The traveler's vibe/preference is: {vibe}.
     The current weather is: {weather}.
-    Keep the total cost under {budget}.
+    Keep the total cost under {budget} INR.
+    
+    IMPORTANT PRICING RULE: You MUST provide highly realistic, local market prices for activities in Indian Rupees (INR). Do NOT artificially inflate prices just because the user has a high budget.
 
     Respond ONLY in valid JSON format following this exact structure:
     {{
@@ -28,24 +30,39 @@ def plan_route(city: str, vibe: str, budget: float):
     }}
     """
 
+    messages = [{'role': 'user', 'content': prompt}]
+
     # Agent-to-Agent Negotiation Loop (Max 3 attempts)
     for attempt in range(3):
         response = client.chat(
             model=settings.OLLAMA_MODEL_NAME,
-            messages=[{'role': 'user', 'content': prompt}],
+            messages=messages,
             format='json'
         )
         
         try:
-            proposed_route = json.loads(response['message']['content'])
+            content = response['message']['content'].strip()
+            # Strip markdown code blocks if the LLM adds them
+            if content.startswith("```json"):
+                content = content[7:]
+            if content.startswith("```"):
+                content = content[3:]
+            if content.endswith("```"):
+                content = content[:-3]
+                
+            proposed_route = json.loads(content.strip())
         except Exception:
-            continue # If it outputs bad JSON, just try again
+            # Tell the LLM it failed to generate JSON
+            messages.append(response['message'])
+            messages.append({'role': 'user', 'content': 'Your previous response was not valid JSON. You MUST output ONLY valid JSON without any markdown formatting or introductory text.'})
+            continue 
 
         if verify_budget(proposed_route, budget):
             return proposed_route
         else:
-            # Agent feedback loop: update the prompt to enforce the constraint harder
-            prompt += f"\n\n[URGENT]: Your previous route exceeded the strict budget of {budget}. You MUST provide cheaper or free activities this time."
+            # Tell the LLM it failed the budget check
+            messages.append(response['message'])
+            messages.append({'role': 'user', 'content': f'[URGENT]: Your previous route exceeded the strict budget of {budget}. You MUST provide cheaper or free activities this time.'})
 
     # Absolute fallback if the AI fails 3 times
     return {
