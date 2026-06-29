@@ -1,5 +1,6 @@
 document.getElementById('generateBtn').addEventListener('click', async () => {
     const city = document.getElementById('cityInput').value;
+    const days = document.getElementById('daysInput').value;
     const vibe = document.getElementById('vibeInput').value;
     const budget = document.getElementById('budgetInput').value;
     const terminal = document.getElementById('terminalOutput');
@@ -9,7 +10,7 @@ document.getElementById('generateBtn').addEventListener('click', async () => {
     const response = await fetch('http://localhost:8000/api/generate_itinerary', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({city, vibe, budget})
+        body: JSON.stringify({city, days, vibe, budget})
     });
 
     const reader = response.body.getReader();
