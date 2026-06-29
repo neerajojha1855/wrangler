@@ -7,13 +7,14 @@ api_bp = Blueprint('api', __name__)
 def generate_itinerary():
     data = request.json
     city = data.get('city')
+    days = data.get('days')
     vibe = data.get('vibe')
     budget = data.get('budget')
 
-    if not all([city, vibe, budget]):
+    if not all([city, days, vibe, budget]):
         return {"error": "Missing parameters"}, 400
     
     return Response(
-        generate_itinerary_stream(city, vibe, budget),
+        generate_itinerary_stream(city, days, vibe, budget),
         mimetype='text/event-stream'
     )
